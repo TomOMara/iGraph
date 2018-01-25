@@ -11,8 +11,8 @@ using NVelocity;
 using NVelocity.App;
 using NVelocity.Context;
 using System.IO;
-using log4net;
 
+using log4net;
 namespace IGraph.LanguageGeneration
 {
   public class LanguageGenerator

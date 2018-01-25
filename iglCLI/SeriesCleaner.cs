@@ -99,13 +99,13 @@ namespace IGraph.Cleaners
       for (int i = 0; i < vals_length; i++)
       {
           _hasnull = false;
-
+          object curr_value = s.Values[i]; 
           //When value is null, setted by string
-          if (s.Values[i].GetType().ToString() == "System.String") 
+          if (curr_value.GetType().ToString() == "System.String") 
           {
-              if (s.Values[i] == null ||
-                  ((String)s.Values[i]).Length == 0 ||
-                  (String)s.Values[i] == "none")
+              if (curr_value == null ||
+                  ((String)curr_value).Length == 0 ||
+                  (String)curr_value == "none")
               {
                   _hasnull = true;
               }
@@ -114,9 +114,10 @@ namespace IGraph.Cleaners
           //Double values
           else 
           {
-              if (s.Values[i] == null ||
-                  (Double)s.Values[i] == 0 ||
-                  s.Values[i].ToString() == "none" )
+              
+              if (curr_value == null ||
+                  (Double)curr_value == 0 ||
+                  curr_value.ToString() == "none" )
               {
                   _hasnull = true;
               }

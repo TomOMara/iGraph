@@ -1,7 +1,6 @@
 C:\Users\tomar\Desktop\dissertation\workspace\igraph-master\iglCLI\obj\Debug\iglCLI.csproj.ResolveComReference.cache
 C:\Users\tomar\Desktop\dissertation\workspace\igraph-master\iglCLI\obj\Debug\igl.Properties.Resources.resources
 C:\Users\tomar\Desktop\dissertation\workspace\igraph-master\iglCLI\obj\Debug\iglCLI.csproj.GenerateResource.Cache
-C:\Users\tomar\Desktop\dissertation\workspace\igraph-master\iglCLI\obj\Debug\iglCLI.csprojResolveAssemblyReference.cache
 C:\Users\tomar\Desktop\dissertation\workspace\igraph-master\iglCLI\obj\Debug\iglCLI.csproj.CoreCompileInputs.cache
 C:\Users\tomar\Desktop\dissertation\workspace\igraph-master\iglCLI\bin\Debug\igl.exe
 C:\Users\tomar\Desktop\dissertation\workspace\igraph-master\iglCLI\bin\Debug\igl.pdb
@@ -16,3 +15,4 @@ C:\Users\tomar\Desktop\dissertation\workspace\igraph-master\iglCLI\obj\Debug\igl
 C:\Users\tomar\Desktop\dissertation\workspace\igraph-master\iglCLI\obj\Debug\igl.pdb
 C:\Users\tomar\Desktop\dissertation\workspace\igraph-master\iglCLI\bin\Debug\Newtonsoft.Json.dll
 C:\Users\tomar\Desktop\dissertation\workspace\igraph-master\iglCLI\bin\Debug\Newtonsoft.Json.xml
+C:\Users\tomar\Desktop\dissertation\workspace\igraph-master\iglCLI\obj\Debug\iglCLI.csprojResolveAssemblyReference.cache

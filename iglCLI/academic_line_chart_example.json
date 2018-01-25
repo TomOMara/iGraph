@@ -1,8 +1,8 @@
 ﻿{
   "width": 894,
   "height": 570,
-  "title": "",
-  "chart_type": "LineGraph",
+  "title": 1,
+  "chart_type": 65,
   "mark": "line",
   "encoding": {
     "x": {
