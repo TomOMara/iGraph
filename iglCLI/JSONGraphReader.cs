@@ -59,8 +59,6 @@ namespace IGraph.GraphReaders
 
 
             graph.MainTitle = GetJSONMainTitle(parsed_file);
-
-            // uses SGGeometry to set plot -> xpos, ypos, width and height
             graph.PlotArea = GetJSONPlotArea(parsed_file);
             graph.Textboxes = GetJSONTextBoxes(parsed_file);
             graph.Series = GetSeriesFromSeriesService(parsed_file);
@@ -101,20 +99,6 @@ namespace IGraph.GraphReaders
 
         private SGCategoryAxis GetJSONCategoryAxis(Dictionary<string, object> file)
         {
-
-            //            // Class data
-            //public string Title { get; set; }
-            //public double Origin { get; set; }
-            //public double Width { get; set; }
-            //public double PosX { get; set; }
-
-            //public List<string> Categories { get; set; }
-            //public List<string> PrimaryCategories { get; set; }
-            //public List<string> SecondaryCategories { get; set; }
-            //public CategoryUnit PrimaryCategoryType { get; set; }
-            //public CategoryUnit SecondaryCategoryType { get; set; }
-            //public TypeAxis CategoriesTypeAxis { get; set; }
-            //public bool PrimaryCategoryNulls { get; set; }
 
             SGCategoryAxis x_axis = new SGCategoryAxis();
 
@@ -224,10 +208,6 @@ namespace IGraph.GraphReaders
 
             SGPlotArea plot_area = new SGPlotArea();
             plot_area.Geometry = new SGGeometry(50, 50, 500.0, 500.0); 
-            //plot_area.Geometry.Width = (double)500.0;
-            //plot_area.Geometry.Height = 500;
-            //plot_area.Geometry.PosX = 40;
-            //plot_area.Geometry.PosY = 40;
 
             return plot_area;
 
