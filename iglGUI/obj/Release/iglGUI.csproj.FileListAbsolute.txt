@@ -1,3 +1,0 @@
-C:\Users\tomar\Desktop\dissertation\workspace\igraph-master\iglGUI\obj\Release\UdeC.iglUI.Form1.resources
-C:\Users\tomar\Desktop\dissertation\workspace\igraph-master\iglGUI\obj\Release\iglUI.Properties.Resources.resources
-C:\Users\tomar\Desktop\dissertation\workspace\igraph-master\iglGUI\obj\Release\iglGUI.csproj.GenerateResource.Cache
