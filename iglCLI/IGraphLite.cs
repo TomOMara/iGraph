@@ -19,7 +19,6 @@ namespace IGraph
     private static readonly ILog log = LogManager.
       GetLogger(typeof(IGraphLite));
 
-    private static ExcelGraphReader xl_reader;
     private static LanguageGenerator nlg;
     private static IGraphOptions ops;
     private static JSONGraphReader json_reader;

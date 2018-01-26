@@ -122,7 +122,6 @@
     </Compile>
     <Compile Include="SeriesCleaner.cs" />
     <Compile Include="CleaningManager.cs" />
-    <Compile Include="ExcelGraphReader.cs" />
     <Compile Include="IIGraphReader.cs" />
     <Compile Include="ICleaner.cs" />
     <Compile Include="SGGraphPrologue.cs" />
