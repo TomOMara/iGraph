@@ -88,7 +88,8 @@ namespace IGraph.StatGraph
 
     public string GetGraphOriginalDirectory()
     {
-      return Path.GetDirectoryName(GetAbsolutePathFile()) + @"\";
+      string path = Path.GetDirectoryName(GetAbsolutePathFile()) + @"\";
+      return path = replacePathSlashesIfNecessary(path);
     }
 
     public string GetGifName()
@@ -102,6 +103,21 @@ namespace IGraph.StatGraph
         this.GetGraphName(), this.origin);
       s += String.Format("embedded in sheet {0}", this.sheet);
       return s;
+    }
+
+    private string replacePathSlashesIfNecessary(string path)
+    {
+
+      int unix_code = (int)Environment.OSVersion.Platform;
+
+      // If the platform is unix based replace the path, replace path slashes
+      if (unix_code == 4 || unix_code == 6 || unix_code == 128)
+      {
+        path = path.Replace("\\", "/");
+      };
+
+      return path;
+
     }
 
   }
