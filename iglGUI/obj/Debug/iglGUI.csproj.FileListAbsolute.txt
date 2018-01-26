@@ -1,4 +1,0 @@
-C:\Users\tomar\Desktop\dissertation\workspace\igraph-master\iglGUI\obj\Debug\iglGUI.csprojResolveAssemblyReference.cache
-C:\Users\tomar\Desktop\dissertation\workspace\igraph-master\iglGUI\obj\Debug\UdeC.iglUI.Form1.resources
-C:\Users\tomar\Desktop\dissertation\workspace\igraph-master\iglGUI\obj\Debug\iglUI.Properties.Resources.resources
-C:\Users\tomar\Desktop\dissertation\workspace\igraph-master\iglGUI\obj\Debug\iglGUI.csproj.GenerateResource.Cache
