@@ -112,11 +112,10 @@ namespace IGraph.LanguageGeneration
 
     private void SaveDescription(string desc)
     {
-      string filename = g.Prologue.GetGraphOriginalDirectory()
-          + g.Prologue.GetGraphName() + ".html";
-
-      TextWriter tw =
-        new StreamWriter(filename);
+      string original_graph_directory = replacePathSlashesIfNecessary(g.Prologue.GetGraphOriginalDirectory()); 
+      string graph_name = g.Prologue.GetGraphName();
+      string filename = original_graph_directory + graph_name + ".html";
+      TextWriter tw = new StreamWriter(filename);
 
       if (File.Exists(filename))
       {
@@ -125,6 +124,19 @@ namespace IGraph.LanguageGeneration
 
       tw.Write(desc);
       tw.Close();
+    }
+
+    private string replacePathSlashesIfNecessary(string path) {
+      
+      int unix_code = (int)Environment.OSVersion.Platform;
+
+      // If the platform is unix based replace the path, replace path slashes
+      if (unix_code == 4 || unix_code == 6 || unix_code == 128) {
+        path = path.Replace("\\", "/"); 
+      };
+
+      return path;
+
     }
 
   }

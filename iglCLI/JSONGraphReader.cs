@@ -37,15 +37,17 @@ namespace IGraph.GraphReaders
             // A container for the graphs to be parsed 
             List<StatisticalGraph> sg_collection = new List<StatisticalGraph>();
 
+            StatisticalGraph graph = new StatisticalGraph();
+
             // Some excel flags we shouldn't need 
             const int graphID = 1;
             const int sheetName = 1;
 
-            // Build empty graph object that will get translated by LanguageGenerators
-            StatisticalGraph graph = new StatisticalGraph();
-
             jo_parsed_file = JObject.Parse(File.ReadAllText(file));
             var parsed_file = jo_parsed_file.ToObject<Dictionary<string, object>>();
+
+
+            int one = 1;
 
             // Prologue which holds metadata about graph, mainly name and size
             graph.Prologue = new GraphPrologue(file,

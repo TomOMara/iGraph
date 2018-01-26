@@ -66,9 +66,10 @@
           break;
       }
       
-      appender.ActivateOptions();
+      //appender.ActivateOptions();
       BasicConfigurator.Configure(appender);
       IGraphConsole.WriteLine("Log level set to: " + appender.Threshold + " (" + opts.LogLevel + ")");
+      Console.WriteLine("The current directory is {0}", Directory.GetCurrentDirectory());
       #endregion
 
       if (opts.isHelp)

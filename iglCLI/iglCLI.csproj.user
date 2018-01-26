@@ -30,4 +30,10 @@
     <StartArguments>
     </StartArguments>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'Default' ">
+    <StartAction>Project</StartAction>
+    <StartArguments>-g -x -l 6   /Users/tom/workspace/uni/statsee/iGraph/json/</StartArguments>
+    <StartWorkingDirectory>bin\Debug</StartWorkingDirectory>
+    <ExternalConsole>true</ExternalConsole>
+  </PropertyGroup>
 </Project>
