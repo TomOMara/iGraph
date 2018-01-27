@@ -21,7 +21,6 @@ namespace IGraph.GraphReaders
 
     class JSONGraphReader : IIGraphReader
     {
-        private StatisticalGraph graph;
         private JObject jo_parsed_file;
 
         public JSONGraphReader()
@@ -46,17 +45,14 @@ namespace IGraph.GraphReaders
             jo_parsed_file = JObject.Parse(File.ReadAllText(file));
             var parsed_file = jo_parsed_file.ToObject<Dictionary<string, object>>();
 
-
-            int one = 1;
-
             // Prologue which holds metadata about graph, mainly name and size
             graph.Prologue = new GraphPrologue(file,
                                                 "JSON",
                                                 graphID,
                                                 sheetName,
-                                                GetGraphType(parsed_file),
-                                                GetGraphHeight(parsed_file),
-                                                GetGraphWidth(parsed_file));
+                                                GetGraphType(),
+                                                GetGraphHeight(),
+                                                GetGraphWidth());
 
 
 
@@ -72,54 +68,54 @@ namespace IGraph.GraphReaders
             return sg_collection;
         }
 
-        private double GetGraphWidth(Dictionary<string, object> file)
+        private double GetGraphWidth()
         {
-            object output;
-            file.TryGetValue("width", out output);
-            Console.WriteLine("width: {0}", output);
-
-            return Convert.ToDouble(output);
+            return Convert.ToDouble(jo_parsed_file["width"]);
         }
 
-        private double GetGraphHeight(Dictionary<string, object> file)
+        private double GetGraphHeight()
         {
-            object output;
-            file.TryGetValue("height", out output);
-            Console.WriteLine("height {0}", output);
-
-            return Convert.ToDouble(output);
+            return Convert.ToDouble(jo_parsed_file["height"]);
         }
 
-        private string GetGraphType(Dictionary<string, object> file)
+        private string GetGraphType()
         {
-            object output;
-            file.TryGetValue("chart_type", out output);
-            Console.WriteLine("Graph type: {0}", output);
+            string chart_type = Convert.ToString(jo_parsed_file["chart_type"]);
 
-            return Convert.ToString(output);
+            if (chart_type == "LineGraph") {
+                return "4";  // code for linegraph 
+            } else {
+              // OTHER CODES USED ON English.nv 
+              return "0";
+            }
+
         }
 
         private SGCategoryAxis GetJSONCategoryAxis(Dictionary<string, object> file)
         {
 
             SGCategoryAxis x_axis = new SGCategoryAxis();
+            x_axis.Title = Convert.ToString(jo_parsed_file["encoding"]["x"]["field"]);
 
-            x_axis.Title = "Year";
+            // STUBBED
             x_axis.Origin = 0.0;
             x_axis.Width = 500;
             x_axis.PosX = 1;
-            x_axis.Categories = new List<String>(); // empty list of categories
-            x_axis.Categories.Add("1");
-            x_axis.Categories.Add("2");
-            x_axis.Categories.Add("3");
-            x_axis.Categories.Add("4");
-            x_axis.Categories.Add("5");
-            x_axis.Categories.Add("6");
-            x_axis.Categories.Add("7");
-            x_axis.Categories.Add("8");
+            x_axis.PrimaryCategoryType = CategoryUnit.MISC;
+            x_axis.CategoriesTypeAxis = TypeAxis.DISCRETE;
 
-            x_axis.PrimaryCategoryType = CategoryUnit.YEAR;
-            x_axis.CategoriesTypeAxis = TypeAxis.CONTINUOS;
+
+            x_axis.Categories = new List<String>(); // empty list of categories
+            string x_axis_labels_str = Convert.ToString(jo_parsed_file["encoding"]["x"]["scale"]["labels"]);
+            object x_axis_labels = JsonConvert.DeserializeObject(x_axis_labels_str);
+
+            JArray labels_array = (JArray)x_axis_labels;
+
+            // Add each categoryto our list of categories
+            foreach (var category in labels_array.Children())
+            {
+                x_axis.Categories.Add(category.Value<string>());
+            }
 
             return x_axis;
 
@@ -127,11 +123,12 @@ namespace IGraph.GraphReaders
 
         private SGValueAxis GetJSONValueAxis(Dictionary<string, object> file)
         {
-            // STUBBED 
 
             SGValueAxis value_axis = new SGValueAxis();
 
-            value_axis.Title = "y axis title";
+            value_axis.Title = Convert.ToString(jo_parsed_file["encoding"]["y"]["field"]);
+
+            // STUBBED
             value_axis.StartsAt = 1;
             value_axis.EndsAt = 10;
             value_axis.ScaleUnit = 1;
@@ -142,13 +139,7 @@ namespace IGraph.GraphReaders
 
         private string GetJSONMainTitle(Dictionary<string, object> file)
         {
-            // STUBBED 
-            object output;
-            file.TryGetValue("title", out output);
-            Console.WriteLine("title: {0}", output);
-            return "test";
-            //return Convert.ToString(output);
-
+            return Convert.ToString(jo_parsed_file["title"]);
         }
 
         private SGSeriesCollection GetSeriesFromSeriesService(Dictionary<string, object> file)
@@ -169,11 +160,9 @@ namespace IGraph.GraphReaders
             object coord_4 = 4.1;
             object coord_5 = 5.1;
             object coord_6 = 6.1;
-            object coord_7 = 7.1;
-            object coord_8 = 8.1;
 
             object[] point_data = { coord_1, coord_2, coord_3,
-                coord_4, coord_5, coord_6, coord_7, coord_8};
+                coord_4, coord_5, coord_6 };
 
             series_values.AddRange(point_data);
 

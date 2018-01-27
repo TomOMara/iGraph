@@ -1,9 +1,12 @@
 {
-  "width": 894,
+  "width": 994,
   "height": 570,
-  "title": "",
+  "title": "F Score Noun frequencies",
   "chart_type": "LineGraph",
   "mark": "line",
+  "series": [
+    { "name": "only", "value": [[1,1],[2,2],[3,3]] }
+  ],
   "encoding": {
     "x": {
       "field": "Noun Frequency",
@@ -31,3 +34,4 @@
     }
   }
 }
+

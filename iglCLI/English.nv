@@ -112,6 +112,7 @@
      #elseif($graph.CategoryAxis.getPrimaryCategoryType()=="MONTH")
 		  months, ranging from $graph.CategoryAxis.getFirstPrimaryCategory() to
 		  $graph.CategoryAxis.getLastPrimaryCategory(). <br />
+          
 	 #end
 
    #end

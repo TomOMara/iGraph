@@ -28,9 +28,7 @@ Global
 		$1.DirectoryNamespaceAssociation = PrefixedHierarchical
 		$0.TextStylePolicy = $2
 		$2.FileWidth = 80
-		$2.TabWidth = 2
 		$2.TabsToSpaces = True
-		$2.IndentWidth = 2
 		$2.scope = text/x-csharp
 		$0.CSharpFormattingPolicy = $3
 		$3.scope = text/x-csharp
@@ -53,5 +51,10 @@ Global
 		$0.XmlFormattingPolicy = $9
 		$9.inheritsSet = null
 		$9.scope = application/config+xml
+		$0.TextStylePolicy = $10
+		$10.FileWidth = 80
+		$10.TabsToSpaces = True
+		$10.scope = text/plain
+		$0.StandardHeader = $11
 	EndGlobalSection
 EndGlobal

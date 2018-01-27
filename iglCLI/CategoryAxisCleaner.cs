@@ -70,7 +70,6 @@ namespace IGraph.Cleaners
         GuessPrimaryCategoryUnit(g.CategoryAxis.GetKnownCategories()[0]);
       log.Debug(g.CategoryAxis.RawCategoriesToString());
       log.Debug("Probable primary category: " + tu);
-
       switch (tu)
       {
         case CategoryUnit.MONTH:
@@ -390,12 +389,20 @@ namespace IGraph.Cleaners
        * c080601b. Makes sense to deal with it as a string because we only have
        * to strip the last character, we will assume footnotes from 1 to 99.
        */
+      
+
       if (m.Length >= 5)
       {
         m = m.Remove(4);
       }
+      Console.WriteLine("yr {0}", m);
+      int yr;
 
-      int yr = Int16.Parse(m);
+      try {
+           yr = Int16.Parse(m);
+      } catch (Exception e) {
+           return -1;
+      }
       switch (m.Length)
       {
         case 4:
