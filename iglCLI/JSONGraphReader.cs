@@ -128,11 +128,13 @@ namespace IGraph.GraphReaders
 
             value_axis.Title = Convert.ToString(jo_parsed_file["encoding"]["y"]["field"]);
 
+            var values =  jo_parsed_file["encoding"]["y"]["scale"]["values"].AsEnumerable() ;
+
             // STUBBED
-            value_axis.StartsAt = 1;
-            value_axis.EndsAt = 10;
+            value_axis.StartsAt =  (Double)values.First();
+            value_axis.EndsAt = (Double)values.Last();
             value_axis.ScaleUnit = 1;
-            value_axis.Stepping = 1;
+            value_axis.Stepping = (Double)values.ElementAt(1) - (Double)values.ElementAt(0);
 
             return value_axis;
         }
