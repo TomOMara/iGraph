@@ -125,12 +125,9 @@ namespace IGraph.GraphReaders
         {
 
             SGValueAxis value_axis = new SGValueAxis();
+            var values =  jo_parsed_file["encoding"]["y"]["scale"]["values"].AsEnumerable();
 
             value_axis.Title = Convert.ToString(jo_parsed_file["encoding"]["y"]["field"]);
-
-            var values =  jo_parsed_file["encoding"]["y"]["scale"]["values"].AsEnumerable() ;
-
-            // STUBBED
             value_axis.StartsAt =  (Double)values.First();
             value_axis.EndsAt = (Double)values.Last();
             value_axis.ScaleUnit = 1;
