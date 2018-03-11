@@ -52,13 +52,13 @@ namespace IGraph.Cleaners
             curr.Values.RemoveAt(curr.Values.Count-1);
             log.Error("Empty first and last elements. Why?");
             break;
-            case SeriesNulls.FIRST_NULL:
+          case SeriesNulls.FIRST_NULL:
             curr.Status = (int)SeriesNulls.FIRST_NULL;
             graph.Series.Dirty = true;
             curr.Values.RemoveAt(0);
             log.Error("Empty first element. Why?");
             break;
-            case SeriesNulls.LAST_NULL:
+          case SeriesNulls.LAST_NULL:
             curr.Status = (int)SeriesNulls.LAST_NULL;
             graph.Series.Dirty = true;
             curr.Values.RemoveAt(curr.Values.Count - 1);

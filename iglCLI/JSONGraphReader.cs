@@ -59,7 +59,7 @@ namespace IGraph.GraphReaders
             graph.MainTitle = GetJSONMainTitle(parsed_file);
             graph.PlotArea = GetJSONPlotArea(parsed_file);
             graph.Textboxes = GetJSONTextBoxes(parsed_file);
-            graph.Series = GetSeriesFromSeriesService(parsed_file);
+            graph.Series = GetSeries(parsed_file);
             graph.ValueAxis = GetJSONValueAxis(parsed_file);
             graph.CategoryAxis = GetJSONCategoryAxis(parsed_file);
 
@@ -141,46 +141,39 @@ namespace IGraph.GraphReaders
             return Convert.ToString(jo_parsed_file["title"]);
         }
 
-        private SGSeriesCollection GetSeriesFromSeriesService(Dictionary<string, object> file)
-        {
-            // STUBBED 
+        private SGSeriesCollection GetSeries(Dictionary<string, object> file){
 
-            // Create SG Series collection
             SGSeriesCollection series_collection = new SGSeriesCollection();
-            SGSeries series = new SGSeries();
+            JObject all_series = (JObject)jo_parsed_file["series"];
 
-            // set dummy data for series
-            List<object> series_values = new List<Object>();
-            int[] point_one = { 1, 1 };
-            int[] point_two = { 2, 2 };
-            object coord_1 = 1.1;
-            object coord_2 = 2.1;
-            object coord_3 = 3.1;
-            object coord_4 = 4.1;
-            object coord_5 = 5.1;
-            object coord_6 = 6.1;
-
-            object[] point_data = { coord_1, coord_2, coord_3,
-                coord_4, coord_5, coord_6 };
-
-            series_values.AddRange(point_data);
-
-            // Just return one stubbed series for now. though this is the series we will get from 
-            // the python script. 
-            series.Type = 0;
-            series.ID = 1;
-            series.Status = 4;
-            series.Name = "main series";
-            series.Values = series_values;
-
-            // add series to collection
-            series_collection.Add(series); 
-
-            return series_collection; 
+            foreach (var series in all_series)
+            {
+                SGSeries parsed_series = new SGSeries();
+ 
+                parsed_series.Type = 0;
+                parsed_series.ID = 1;
+                parsed_series.Status = 4;
+                parsed_series.Name = series.Key;  
+                JObject values = (JObject)series.Value;  
 
 
+                List<Object> val_range = new List<Object>();
+                foreach (var data in values) {
+                  try {
+                    val_range.Add((Double)data.Value); 
+                  } catch (System.ArgumentException e) {
+                    val_range.Add("none");
+                  }
+                }
+                parsed_series.Values = val_range;
+
+                // add series to collection
+                series_collection.Add(parsed_series); 
+            }
+
+            return series_collection;
         }
-
+        
         private SGTextBoxCollection GetJSONTextBoxes(Dictionary<string, object> file)
         { 
             // STUBBED
@@ -194,7 +187,7 @@ namespace IGraph.GraphReaders
         // uses SGGeometry to set plot -> xpos, ypos, width and height
         private SGPlotArea GetJSONPlotArea(Dictionary<string, object> file)
         {
-            // STUBBED 
+            // STUBBED - apparently dont need this? 
 
             SGPlotArea plot_area = new SGPlotArea();
             plot_area.Geometry = new SGGeometry(50, 50, 500.0, 500.0); 
