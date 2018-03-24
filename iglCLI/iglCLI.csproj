@@ -187,7 +187,6 @@
     <None Include="bin\Debug\French.nv" />
     <None Include="English.nv" />
     <None Include="French.nv" />
-    <None Include="academic_line_chart_example.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
