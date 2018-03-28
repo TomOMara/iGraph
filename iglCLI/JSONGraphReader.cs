@@ -95,15 +95,14 @@ namespace IGraph.GraphReaders
         {
 
             SGCategoryAxis x_axis = new SGCategoryAxis();
-            x_axis.Title = Convert.ToString(jo_parsed_file["encoding"]["x"]["field"]);
+            x_axis.Title = Convert.ToString(jo_parsed_file["encoding"]["x"]["axis"]["title"]);
 
             // STUBBED
             x_axis.Origin = 0.0;
             x_axis.Width = 500;
             x_axis.PosX = 1;
-            x_axis.PrimaryCategoryType = CategoryUnit.MISC;
-            x_axis.CategoriesTypeAxis = TypeAxis.DISCRETE;
-
+            x_axis.PrimaryCategoryType = CategoryUnit.MONTH;
+            x_axis.CategoriesTypeAxis = TypeAxis.CONTINUOS;
 
             x_axis.Categories = new List<String>(); // empty list of categories
             string x_axis_labels_str = Convert.ToString(jo_parsed_file["encoding"]["x"]["scale"]["labels"]);
@@ -117,6 +116,9 @@ namespace IGraph.GraphReaders
                 x_axis.Categories.Add(category.Value<string>());
             }
 
+            x_axis.StartsAt = x_axis.Categories.First();
+            x_axis.EndsAt = x_axis.Categories.Last();
+            x_axis.Stepping = Convert.ToString((Double)labels_array.ElementAt(1) - (Double)labels_array.ElementAt(0));
             return x_axis;
 
         }
@@ -127,7 +129,7 @@ namespace IGraph.GraphReaders
             SGValueAxis value_axis = new SGValueAxis();
             var values =  jo_parsed_file["encoding"]["y"]["scale"]["values"].AsEnumerable();
 
-            value_axis.Title = Convert.ToString(jo_parsed_file["encoding"]["y"]["field"]);
+            value_axis.Title = Convert.ToString(jo_parsed_file["encoding"]["y"]["axis"]["title"]);
             value_axis.StartsAt =  (Double)values.First();
             value_axis.EndsAt = (Double)values.Last();
             value_axis.ScaleUnit = 1;

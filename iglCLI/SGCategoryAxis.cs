@@ -64,6 +64,9 @@ namespace IGraph.StatGraph
     public double Origin { get; set; }
     public double Width { get; set; }
     public double PosX { get; set; }
+    public string StartsAt { get; set; }
+    public string EndsAt { get; set; }
+    public string Stepping { get; set; }
 
     public List<string> Categories { get; set; }
     public List<string> PrimaryCategories { get; set; }
