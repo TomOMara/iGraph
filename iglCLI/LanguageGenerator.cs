@@ -17,10 +17,9 @@ namespace IGraph.LanguageGeneration
 {
   public class LanguageGenerator
   {
+    public string output_path { get; set; }
     private StatisticalGraph g;
     private bool error;
-
-
     private static readonly ILog log = LogManager.
       GetLogger(typeof(LanguageGenerator));
 
@@ -113,14 +112,16 @@ namespace IGraph.LanguageGeneration
 
     private void SaveDescription(string desc)
     {
-      string original_graph_directory = g.Prologue.GetGraphOriginalDirectory(); 
       string graph_name = g.Prologue.GetGraphName();
-      string filename = original_graph_directory + graph_name + ".html";
+      string filename = output_path + graph_name + ".html";
       TextWriter tw = new StreamWriter(filename);
 
       if (File.Exists(filename))
       {
+        IGraphConsole.WriteLine("Overwritting an HTML description: \"" + filename + "\".");
         log.Warn("Overwritting an HTML description: \"" + filename + "\".");
+      } else {
+        IGraphConsole.WriteLine("Writing HTML description to " + filename);
       }
 
       tw.Write(desc);

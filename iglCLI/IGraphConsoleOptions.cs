@@ -20,6 +20,7 @@
     int log_level = 2;
     string _csv_file = null;
     string _input_file = null;
+    string _output_dir = null;
 
     public IGraphOptions(string[] a)
     {
@@ -45,8 +46,8 @@
       opset.Add("x|xml", "Export graph to XML file",
         v => _xml_file = v != null);
 
-      opset.Add("o|owl", "Export graph to OWL 2.0 file",
-        v => _owl_file = v != null);
+      opset.Add("o|output=", "Set output directory",
+        v => _output_dir = v);
 
       param = opset.Parse(args);
     }
@@ -64,7 +65,7 @@
       return false;
     }
 
-    public string DirectoryName
+  public string DirectoryName
     {
       get
       {
@@ -90,6 +91,12 @@
       {
         return _input_file;
       }
+    }
+
+    public string OutputDir
+    {
+      get { return _output_dir; }
+
     }
 
     public int LogLevel
