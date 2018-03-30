@@ -44,12 +44,23 @@
 
   ## GRAPH DETAILS
   #if($graph.Series.Count > 1)
-  There are $graph.Series.Count series in this graph. <br />
-  #else
-  There is only one series in this graph. <br />
+  There are $graph.Series.Count series in this graph, labelled 
+  #set($i = 1)
+  
+  #foreach($s in $graph.Series)
+    #if ($i != $graph.Series.Count)  
+        $s.Name, 
+        #set( $i = $i + 1 )
+    #else 
+        and $s.Name.
+        
+    #end
   #end
-
-
+  <br />
+  
+  #else
+  There is only one series in this graph, labelled $graph.Series.Name. <br />
+  #end
 
   ## VALUE AXIS INFO
   ### Horizontal graph
@@ -140,42 +151,10 @@
 
 	#set( $nMins = $s.getMinValuesAt().Count() )
 	#set( $nMaxs = $s.getMaxValuesAt().Count() )
-
-    ##The minimum value is $s.minValue occuring in $graph.CategoryAxis.getPrimaryCategoryAt($minAt) $graph.CategoryAxis.getSecondaryCategoryAt($minAt). <br />
-	The minimum value is $s.minValue occuring in
-	#set( $i = 0)
-	#foreach ( $minAt in $s.getminValuesAt() )
-		$graph.CategoryAxis.getPrimaryCategoryAt($minAt) $graph.CategoryAxis.getSecondaryCategoryAt($minAt)
-		#if ( $i + 2 == $nMins )
-			and
-	    #elseif ( $i + 1 == $nMins )
-	        .
-	    #else
-			,
-	    #end
-
-		#set( $i = $i + 1 )
-	#end
-	<br />
-
-    ##The maximum value is $s.maxValue occuring in $graph.CategoryAxis.getPrimaryCategoryAt($maxAt) $graph.CategoryAxis.getSecondaryCategoryAt($maxAt). <br />
-    The maximum value is $s.maxValue occuring in
-    #set( $i = 0 )
-	#foreach ( $maxAt in $s.getmaxValuesAt() )
-		$graph.CategoryAxis.getPrimaryCategoryAt($maxAt) $graph.CategoryAxis.getSecondaryCategoryAt($maxAt)
-		#if ( $i + 2 == $nMaxs )
-			and
-	    #elseif ( $i + 1 == $nMaxs )
-	        .
-	    #else
-			,
-	    #end
-
-		#set( $i = $i + 1 )
-	#end
-	<br />
-
-
+    In the graph, the $s.Name line begins on $graph.CategoryAxis.Title() $graph.CategoryAxis.StartsAt at
+     $s.StartsAt $graph.ValueAxis.Title and ends on $graph.CategoryAxis.Title() $s.CategoryEndsAt at $s.EndsAt $graph.ValueAxis.Title <br />
+    $s.Trend. <br />
+ 
   #end
 
   #if ($graph.Textboxes.CountFootnotes() > 0)
@@ -191,6 +170,7 @@
 	#end
    #end
    #end
+   The data are summarized in the following table. Figures are in $graph.ValueAxis.Title(). All data are approximate. 
 </p>
 <!--descriptionend-->
 
