@@ -44,7 +44,10 @@ namespace IGraph.Cleaners
             num_ser--;
             log.Error("Empty series. Why?");
             break;
-          
+          case SeriesNulls.SOME_NULL:
+            curr.Status = (int)SeriesNulls.SOME_NULL;
+            CleanSomeNullValues(curr);
+            break;          
           case SeriesNulls.FIRST_LAST_NULL:
             curr.Status = (int)SeriesNulls.FIRST_LAST_NULL;
             graph.Series.Dirty = true;
@@ -64,10 +67,7 @@ namespace IGraph.Cleaners
             curr.Values.RemoveAt(curr.Values.Count - 1);
             log.Error("Empty last element. Why?");
             break;
-          case SeriesNulls.SOME_NULL:
-            curr.Status = (int)SeriesNulls.SOME_NULL;
-            CleanSomeNullValues(curr);
-            break;
+
           default:
             curr.Status = (int)SeriesNulls.NO_NULL;
             problem = false;
@@ -141,6 +141,10 @@ namespace IGraph.Cleaners
       {
           return SeriesNulls.ALL_NULL;
       }
+      else if (num_nulls > 0)
+      {
+        return SeriesNulls.SOME_NULL;
+      }
       else if (first && last)
       {
           return SeriesNulls.FIRST_LAST_NULL; // see graph c080229c
@@ -149,10 +153,7 @@ namespace IGraph.Cleaners
           return SeriesNulls.FIRST_NULL;
       else if (last)
           return SeriesNulls.LAST_NULL;
-      else if (num_nulls > 0)
-      {
-          return SeriesNulls.SOME_NULL;
-      }
+
       return SeriesNulls.NO_NULL;
     }
 

@@ -35,20 +35,16 @@ namespace IGraph
       string inputFilename = ops.InputFilename;
       string[] json_files = Directory.GetFiles(dir, "*.json");
 
-      foreach (string file in json_files)
-      {
-          processFile(file, null, null);
-      }
+      nlg.output_path = ops.OutputDir;
+
+      processFile(inputFilename, null, null);
       log.Info("Successfully released the Excel handle. This is awesome.");
       IGraphConsole.WriteLine("Done.");
       Environment.Exit(IGraphConstants.EXIT_SUCCESS);
     }
 
-    private static void processFile(string file, string lang, string title)
+    private static void processFile(string f, string lang, string title)
     {
-      // Temporarily name file as 'academic_line_chart_example'
-      string f = Path.GetFullPath(file); // the full path of "file"
-
       IGraphConsole.WriteLine("Processing file: " + f);
 
       List<StatisticalGraph> sgList = json_reader.BuildGraphList(f, ops.writeGIF);
