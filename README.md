@@ -20,7 +20,7 @@ Note:
 4. When running the built solution (.exe) you will need to provide the following arguments:
 
 Arguments:
-> ```iGraph.exe -g -x -l 6  <full_path_to_json_folder>```
+> ```iGraph.exe -g -l 6 -f <full_path_to_json_file> -o <html_output_directory>```
     
 Run in directory (ViSt only):   
 >`<path_to_exe>` (I think...)
