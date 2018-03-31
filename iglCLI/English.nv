@@ -229,9 +229,13 @@
       </th>
 
       #set ( $j = 0 )
-      #foreach ($v in $s.Values)
+      #foreach ($v in $s.ValuesIncludingNones)
 		#set ( $j = $j + 1 )
-        <td headers="#headers($j)">$v</td>
+        #if ($v != "none")
+            <td headers="#headers($j)">$v</td>
+        #else 
+            <td headers="#headers($j)">  </td>
+        #end
       #end
 
     </tr>
