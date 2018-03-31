@@ -9,7 +9,6 @@ using IGraph.StatGraph;
 using IGraph.GraphReaders;
 using IGraph.Cleaners;
 using IGraph.LanguageGeneration;
-using IGraph.GraphWriters;
 
 namespace IGraph
 {
@@ -61,13 +60,6 @@ namespace IGraph
 
           // Graph cleaning goes first.
           CleaningManager.CleanGraph(sg);
-
-          // Writers go second
-          if (ops.writeXML)
-          {
-            log.Debug("Writing graph as XML file.");
-            XMLGraphWriter.write(sg);
-          }
 
           // NLG goes last.
           if (nlg.Generate(sg))

@@ -27,20 +27,11 @@
     This is a combination graph. <br />
   #end
 
-  ## HORIZONTAL BAR GRAPH
-  #if($graph.Prologue.GetGraphType()==57)
-    This is a horizontal bar graph, so categories are on the vertical axis and values on the horizontal axis. <br />
-    ## The title of the chart is "<xsl:value-of select="/vdesc/scene/graph/titles/mainTitle/primary/text()"/>".
-    There are in total $graph.CategoryAxis.PrimaryCategories.Count categories on this vertical axis. <br />
-    The horizontal (or value) axis starts at $graph.ValueAxis.StartsAt and ends at $graph.ValueAxis.EndsAt,
-    with ticks every $graph.ValueAxis.Stepping. <br />
-
+ 
   ## EXPLAIN FOR ANY OTHER GRAPH DISTINCT TO HORIZONTAL BAR GRAPH
-  #else
     There are in total $graph.CategoryAxis.PrimaryCategories.Count categories in the horizontal axis.
     The vertical axis starts at $graph.ValueAxis.StartsAt and ends at $graph.ValueAxis.EndsAt,
     with ticks every $graph.ValueAxis.Stepping $english.PluralizeWord('point',$graph.ValueAxis.Stepping).  <br />
-  #end
 
   ## GRAPH DETAILS
   #if($graph.Series.Count > 1)
@@ -151,7 +142,7 @@
 
 	#set( $nMins = $s.getMinValuesAt().Count() )
 	#set( $nMaxs = $s.getMaxValuesAt().Count() )
-    In the graph, the $s.Name line begins on $graph.CategoryAxis.Title() $graph.CategoryAxis.StartsAt at
+    In the graph, the $s.Name line begins on $s.CategoryStartsAt() at
      $s.StartsAt $graph.ValueAxis.Title and ends on $graph.CategoryAxis.Title() $s.CategoryEndsAt at $s.EndsAt $graph.ValueAxis.Title <br />
     $s.Trend. <br />
  
@@ -229,9 +220,13 @@
       </th>
 
       #set ( $j = 0 )
-      #foreach ($v in $s.Values)
+      #foreach ($v in $s.ValuesIncludingNones)
 		#set ( $j = $j + 1 )
-        <td headers="#headers($j)">$v</td>
+        #if ($v != "none")
+            <td headers="#headers($j)">$v</td>
+        #else 
+            <td headers="#headers($j)">  </td>
+        #end
       #end
 
     </tr>

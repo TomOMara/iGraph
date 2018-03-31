@@ -53,9 +53,8 @@ namespace IGraph.StatGraph
 
     public string GetGraphName()
     {
-      return Path.GetFileName(file).Split('.')[0] + "_" + sheet + "_" + id;
+      return Path.GetFileName(file).Split('.')[0];
     }
-
     public string GetLanguageByFilename()
     {
       if (GetOriginalExcelFile().StartsWith("c"))

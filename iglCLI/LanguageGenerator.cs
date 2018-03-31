@@ -100,7 +100,7 @@ namespace IGraph.LanguageGeneration
       } catch (Exception e)
       {
         log.Error("NVelocity error." + e.Message);
-        Console.WriteLine("NVelocity error: ", e.Message);
+        IGraphConsole.WriteLine("NVelocity error: " + e);
         error = true;
       }
 

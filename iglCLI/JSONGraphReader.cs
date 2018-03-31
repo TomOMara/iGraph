@@ -166,6 +166,7 @@ namespace IGraph.GraphReaders
 
         List<Object> val_range = new List<Object>();
         List<Object> key_range = new List<Object>();
+        List<Object> val_range_copy = new List<object>();
         int last_value_index = -1;
         foreach (var data in values)
         {
@@ -173,20 +174,25 @@ namespace IGraph.GraphReaders
           {
             val_range.Add((Double)data.Value);
             key_range.Add((String)data.Key);
+
+            val_range_copy.Add((Double)data.Value);
+
             last_value_index += 1;
           }
           catch (System.ArgumentException e)
           {
             val_range.Add("none");
+            val_range_copy.Add("none");
           }
         }
         parsed_series.Values = val_range;
         parsed_series.EndsAt = (Double)val_range[last_value_index];
         parsed_series.CategoryEndsAt = Convert.ToDouble(key_range[last_value_index]);
         parsed_series.CategoryStartsAt = Convert.ToDouble(key_range.First());
-
         parsed_series.StartsAt = (Double)val_range.OfType<Double>().First();
         parsed_series.Trend = (string)jo_parsed_file["trends"][series.Key];
+        parsed_series.ValuesIncludingNones = val_range_copy;
+
         // add series to collection
         series_collection.Add(parsed_series);
       }

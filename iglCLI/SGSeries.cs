@@ -15,7 +15,12 @@ namespace IGraph.StatGraph
     public int Status { get; set; }             // -
     public string Name { get; set; }            // 
     public List<object> Values { get; set; }
-
+    public List<object> ValuesIncludingNones { get; set; }
+    public double EndsAt { get; set; }
+    public double StartsAt { get; set; }
+    public double CategoryEndsAt { get; set; }
+    public double CategoryStartsAt { get; set; }
+    public string Trend { get; set; }
     private object _minValue;
     private object _maxValue;
 
