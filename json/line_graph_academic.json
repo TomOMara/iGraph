@@ -79,8 +79,8 @@
   "mark":"line",
   "series":{
     "A":{
-      "1.0":5.72,
-      "1.5":5.72,
+      "1.0":null,
+      "1.5":null,
       "2.0":5.72,
       "2.5":5.72,
       "3.0":5.72,
@@ -113,5 +113,10 @@
     }
   },
   "title":"F Score Noun frequencies",
+  "trends": {
+    "A":"example trend",
+    "B":"example trend",
+    "C":"example trend"
+  },
   "width":994
 }
