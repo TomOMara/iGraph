@@ -27,28 +27,22 @@
     This is a combination graph. <br />
   #end
 
- 
-  ## EXPLAIN FOR ANY OTHER GRAPH DISTINCT TO HORIZONTAL BAR GRAPH
-    There are in total $graph.CategoryAxis.PrimaryCategories.Count categories in the horizontal axis.
-    The vertical axis starts at $graph.ValueAxis.StartsAt and ends at $graph.ValueAxis.EndsAt,
-    with ticks every $graph.ValueAxis.Stepping $english.PluralizeWord('point',$graph.ValueAxis.Stepping).  <br />
-
   ## GRAPH DETAILS
   #if($graph.Series.Count > 1)
-  There are $graph.Series.Count series in this graph, labelled 
+  There are $graph.Series.Count lines in this graph, labelled
   #set($i = 1)
-  
+
   #foreach($s in $graph.Series)
-    #if ($i != $graph.Series.Count)  
-        $s.Name, 
+    #if ($i != $graph.Series.Count)
+        $s.Name,
         #set( $i = $i + 1 )
-    #else 
+    #else
         and $s.Name.
-        
+
     #end
   #end
   <br />
-  
+
   #else
   There is only one series in this graph, labelled $graph.Series.Name. <br />
   #end
@@ -58,7 +52,7 @@
   #if($graph.Prologue.GetGraphType()==57)
 	The horizontal axis is
   #else
-	The vertical axis is
+	The vertical axis is labelled
   #end
 
   #if($graph.ValueAxis.Title=='null')
@@ -110,7 +104,7 @@
 		  $graph.CategoryAxis.getLastPrimaryCategory(). <br />
 
     #else
-        $graph.CategoryAxis.getTitle() ....    
+        $graph.CategoryAxis.getTitle() ....
 	#end
 
    #end
@@ -118,34 +112,14 @@
   #foreach($s in $graph.Series)
     #set ( $id = $s.ID + 1 )
 
-    The title of series $id is "$s.Name"
-    #if($s.Type==4)
-       and it is a line series. <br />
-    #elseif($s.Type==57)
-       and it is a horizontal bar series. <br />
-    #elseif($s.Type==52)
-       and it is part of a stacked column series. <br />
-    #elseif($s.Type==51)
-       and it is a series of bars. <br />
-    #elseif($s.Type==76)
-       and it is an area series. <br />
-    #elseif($s.Type==53)
-       and it is a series of bars that add up to 100%. <br />
-    #elseif($s.Type==58)
-       and it is a series of stacked bars. <br />
-    #else . <br />
-
-    ##  ?????????????????? $s.Type ????????????????????????
-
-    #end
 
 
 	#set( $nMins = $s.getMinValuesAt().Count() )
 	#set( $nMaxs = $s.getMaxValuesAt().Count() )
-    In the graph, the $s.Name line begins on $s.CategoryStartsAt() at
+    In the graph, the $s.Name line begins on $s.CategoryStartsAt() $graph.CategoryAxis.Title() at
      $s.StartsAt $graph.ValueAxis.Title and ends on $graph.CategoryAxis.Title() $s.CategoryEndsAt at $s.EndsAt $graph.ValueAxis.Title <br />
     $s.Trend. <br />
- 
+
   #end
 
   #if ($graph.Textboxes.CountFootnotes() > 0)
@@ -161,7 +135,7 @@
 	#end
    #end
    #end
-   The data are summarized in the following table. Figures are in $graph.ValueAxis.Title(). All data are approximate. 
+   The data are summarized in the following table. Figures are in $graph.ValueAxis.Title(). All data are approximate.
 </p>
 <!--descriptionend-->
 
@@ -171,13 +145,17 @@
   <table border="1" cellpadding="4" cellspacing="0">
   <caption>Data table for this chart</caption>
   <tbody>
+    <tr>
+        <th> </th>
+        <th colspan="$totalcols">$graph.CategoryAxis.Title()</th>
+    </tr>
 
     #macro( header )#set( $head = $idcols - $totalcols - 2)un_${head}#end
     #macro( headers $j )#set( $lastcol = $idcols - 1 )#set( $head1 = $j )#set( $head2 = $j + $totalcols + 1)un_${lastcol} un_${head1}#if ($graph.CategoryAxis.SecondaryCategories.Count > 0) un_${head2}#end#end
     #macro( createid )un_${idcols}#set( $idcols = $idcols + 1 )#end
 
     <tr>
-	<th id="#createid()"> $english.EnglishWord($graph.CategoryAxis.getPrimaryCategoryType()) </th>
+	<th id="#createid()">Lines</th>
 		#foreach ($pc in $graph.CategoryAxis.PrimaryCategories )
 		  <th id="#createid()" >$pc</th>
 		#end
@@ -185,7 +163,7 @@
 
    #if ($graph.CategoryAxis.SecondaryCategories.Count > 0)
    <tr>
-	<th id="#createid()"> $english.EnglishWord($graph.CategoryAxis.getSecondaryCategoryType()) </th>
+	<th id="#createid()">$english.EnglishWord($graph.CategoryAxis.getSecondaryCategoryType()) </th>
     	#foreach ($sc in $graph.CategoryAxis.SecondaryCategories )
 	     <th id="#createid()" headers="#header()" >$sc</th>
 		#end
@@ -195,7 +173,6 @@
    ## For duplicates
    #set( $pseries = [] )
    #set( $pcounter = [] )
-
    #foreach($s in $graph.Series)
     <tr>
       <th id="#createid()">
@@ -224,7 +201,7 @@
 		#set ( $j = $j + 1 )
         #if ($v != "none")
             <td headers="#headers($j)">$v</td>
-        #else 
+        #else
             <td headers="#headers($j)">  </td>
         #end
       #end
