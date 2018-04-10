@@ -3,33 +3,11 @@
 <div>
   <p>
   ## GENERAL GRAPH PROPERTIES
-  The title of the graph is "$graph.MainTitle". <br />
-
-  ## LINE GRAPHS
-  #if($graph.Prologue.GetGraphType()==4)
-    This is a line graph. <br />
-
-  ## VERTICAL BAR GRAPHS
-  #elseif($graph.Prologue.GetGraphType()==51)
-    This is a vertical bar graph,
-    so categories are on the horizontal axis and values on the vertical axis. <br />
-
-  ## STACKED BAR GRAPHS
-  #elseif($graph.Prologue.GetGraphType()==52)
-    This is a stacked bar graph. <br />
-
-  ## HORIZONTAL BAR GRAPH
-  #elseif($graph.Prologue.GetGraphType()==57)
-
-
-  ## COMBINATION GRAPH
-  #else
-    This is a combination graph. <br />
-  #end
+  The title of the graph is "$graph.MainTitle". This is a line graph,
 
   ## GRAPH DETAILS
   #if($graph.Series.Count > 1)
-  There are $graph.Series.Count lines in this graph, labelled
+   and there are $graph.Series.Count lines in this graph, labelled
   #set($i = 1)
 
   #foreach($s in $graph.Series)
@@ -44,8 +22,9 @@
   <br />
 
   #else
-  There is only one series in this graph, labelled $graph.Series.Name. <br />
+   and there is only one series in this graph, labelled $graph.Series.Name. <br />
   #end
+  <br />
 
   ## VALUE AXIS INFO
   ### Horizontal graph
@@ -64,7 +43,8 @@
   #elseif($graph.ValueAxis.Title=='%' )
 	percent. <br />
   #else
-    $graph.ValueAxis.Title. <br />
+    $graph.ValueAxis.Title, beginning with $graph.ValueAxis.StartsAt to $graph.ValueAxis.EndsAt, in increments of $graph.ValueAxis.Stepping.
+    <br />
     ## FIXIT is there any secondary title?
   #end
 
@@ -78,6 +58,7 @@
        .
     #end
     <br/>
+  <br />
   #else
 
 	#if($graph.Prologue.GetGraphType()==57)
@@ -106,6 +87,7 @@
     #else
         $graph.CategoryAxis.getTitle() ....
 	#end
+  <br />
 
    #end
 
@@ -117,9 +99,9 @@
 	#set( $nMins = $s.getMinValuesAt().Count() )
 	#set( $nMaxs = $s.getMaxValuesAt().Count() )
     In the graph, the $s.Name line begins on $s.CategoryStartsAt() $graph.CategoryAxis.Title() at
-     $s.StartsAt $graph.ValueAxis.Title and ends on $graph.CategoryAxis.Title() $s.CategoryEndsAt at $s.EndsAt $graph.ValueAxis.Title <br />
+     $s.StartsAt $graph.ValueAxis.Title and ends on $graph.CategoryAxis.Title() $s.CategoryEndsAt at $s.EndsAt $graph.ValueAxis.Title. <br />
     $s.Trend. <br />
-
+    <br />
   #end
 
   #if ($graph.Textboxes.CountFootnotes() > 0)
