@@ -28,17 +28,17 @@ namespace IGraph.GraphReaders
 
     }
 
-    /* This method builds and returns a list of Statisitcal Graph objects from 
-     * a (json) file.  
+    /* This method builds and returns a list of Statisitcal Graph objects from
+     * a (json) file.
      */
     public List<StatisticalGraph> BuildGraphList(string file, bool gif)
     {
-      // A container for the graphs to be parsed 
+      // A container for the graphs to be parsed
       List<StatisticalGraph> sg_collection = new List<StatisticalGraph>();
 
       StatisticalGraph graph = new StatisticalGraph();
 
-      // Some excel flags we shouldn't need 
+      // Some excel flags we shouldn't need
       const int graphID = 1;
       const int sheetName = 1;
 
@@ -85,11 +85,11 @@ namespace IGraph.GraphReaders
 
       if (chart_type == "LineGraph")
       {
-        return "4";  // code for linegraph 
+        return "4";  // code for linegraph
       }
       else
       {
-        // OTHER CODES USED ON English.nv 
+        // OTHER CODES USED ON English.nv
         return "0";
       }
 
@@ -186,7 +186,7 @@ namespace IGraph.GraphReaders
           }
         }
         parsed_series.Values = val_range;
-        parsed_series.EndsAt = (Double)val_range[last_value_index];
+        parsed_series.EndsAt = (Double)val_range.OfType<Double>().Last();
         parsed_series.CategoryEndsAt = Convert.ToDouble(key_range[last_value_index]);
         parsed_series.CategoryStartsAt = Convert.ToDouble(key_range.First());
         parsed_series.StartsAt = (Double)val_range.OfType<Double>().First();
@@ -213,7 +213,7 @@ namespace IGraph.GraphReaders
     // uses SGGeometry to set plot -> xpos, ypos, width and height
     private SGPlotArea GetJSONPlotArea(Dictionary<string, object> file)
     {
-      // STUBBED - apparently dont need this? 
+      // STUBBED - apparently dont need this?
 
       SGPlotArea plot_area = new SGPlotArea();
       plot_area.Geometry = new SGGeometry(50, 50, 500.0, 500.0);
